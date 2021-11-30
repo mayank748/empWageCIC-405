@@ -13,21 +13,21 @@ empWorkedHour=0
 totalSalary=0
 empWage=0
 
-if [ $isPresent -eq $valueForPresent ]
-then
-	echo "Emp is present."
-	empWorkedHour=$FullDayWorkingHour
-	empWage=$wagePerHour
-else
-	if [ $isPresent -eq $valueForPartTime ]
-	then
+case $isPresent in 
+	$valueForPresent)
+		echo "Emp is present."
+		empWorkedHour=$FullDayWorkingHour
+		empWage=$wagePerHour
+	;;
+	$valueForPartTime)
 		echo "Emp is doing part time"
 		empWorkedHour=$FullDayPartTimeWorkingHour
 		empWage=$wagePerForPatTime
-	else
+	;;
+	*)
 		echo "Emp is absent."
-	fi
-fi
+	;;
+esac
 
 function CalculatEmpWage(){
 	empWorked=$1
