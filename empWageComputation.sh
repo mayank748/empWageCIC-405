@@ -23,6 +23,12 @@ function CalculatEmpWage(){
 	echo $(($empWorked*$wagePerHour))
 }
 
+function CalculateEmpTotalWorkedHour(){
+	empWorkedForTotalPassedDays=$1
+	empWorkedInTheSameDay=$2
+	echo $(($empWorkedForTotalPassedDays+$empWorkedInTheSameDay))
+}
+
 while [ $daysPased -le $numberOfWorkingDaysInMonth ] && [ $workedHourInMonth -le $totalWorkingHourInMonth ]
 do
 
@@ -49,7 +55,7 @@ esac
 if [ $isPresent -eq $valueForPresent ] || [ $isPresent -eq $valueForPartTime ]
 then
 	totalSalary=`CalculatEmpWage $empWorkedHour $empWage`
-	workedHourInMonth=$(($workedHourInMonth+$empWorkedHour))
+	workedHourInMonth=`CalculateEmpTotalWorkedHour $workedHourInMonth $empWorkedHour`
 fi
 echo "Total Salary for one day "$totalSalary
 totalSalaryForMonth=$(($totalSalaryForMonth+$totalSalary))
