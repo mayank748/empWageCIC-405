@@ -1,7 +1,7 @@
 #! /bin/bash/ -x
 
 echo "Welcome"
-
+declare -A dayDailWageTotalWageDictionary
 numberOfWorkingDaysInMonth=20
 valueForPresent=1
 valueForPartTime=2
@@ -65,8 +65,10 @@ wageArray[ $daysPased ]=`echo '{ Daily Wage '$totalSalary 'Total Wage '$totalSal
 		valueAtLast=${wageArray[ $daysPased ]}
 		wageArray[ $daysPased ]=`echo $valueAtLast | awk -F, '{print $1}'`
 	fi
+dayDailWageTotalWageDictionary[$daysPased]=${wageArray[$daysPased]}
 ((daysPased++))
 done
 
-echo "Total daily with total wage "${wageArray[@]}
+echo "days values  "${!dayDailWageTotalWageDictionary[@]}
+echo "Total daily wage with total wage with days value  "${dayDailWageTotalWageDictionary[@]}
 
