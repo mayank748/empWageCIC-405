@@ -59,9 +59,14 @@ then
 fi
 echo "Total Salary for one day "$totalSalary
 totalSalaryForMonth=$(($totalSalaryForMonth+$totalSalary))
+wageArray[ $daysPased ]=`echo '{ Daily Wage '$totalSalary 'Total Wage '$totalSalaryForMonth '},'`
+	if [ $daysPased -eq 20 ] || [ $workedHourInMonth -ge 100 ]
+	then
+		valueAtLast=${wageArray[ $daysPased ]}
+		wageArray[ $daysPased ]=`echo $valueAtLast | awk -F, '{print $1}'`
+	fi
 ((daysPased++))
 done
 
-echo "Total month salary of the employee is "$totalSalaryForMonth
-
+echo "Total daily with total wage "${wageArray[@]}
 
